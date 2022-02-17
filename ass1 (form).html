@@ -1,0 +1,167 @@
+<html>
+    <head>
+        <body>
+         <!DOCTYPE html>
+         <html lang="en">
+         <head>
+             <meta charset="UTF-8">
+             <meta http-equiv="X-UA-Compatible" content="IE=edge">
+             <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+             <title>Document</title>
+             <style>
+             *{
+                font-family: sans-serif;
+             }
+             .question {
+               padding:10px 20px ;
+             }
+             .question label{
+               font-size:15px;
+               padding:bottom:20px;
+             }
+             .question input{
+                 width:100%;
+                 border:none;
+                 padding-top:5px;
+                 border-bottom: 1px solid grey;
+            }
+            .question input: focus visible {
+                outline:none;
+            }
+            .form-wrapper{
+                width:500px;
+                max-width:80vw;
+                margin:auto;
+                box-shadow: 0px 0px 2px 0px black;
+                border-radius:8px;
+                padding:20px;
+                margin-top:50px;
+            }
+            .button-wrapper{
+                text-align:center;
+
+            }
+            .button-wrapper button {
+               width:120px;
+               padding:8px;
+               font-weight:600;
+               background:#0285fb;
+               border:none;
+               border-radius:21px;
+               color:white;
+                
+            }
+            input [type='checkbox'] {
+                width:unset;
+            }
+
+            </style>
+         </head>
+        
+         <body>
+            <div id="form-wrapper" class ="form-wrapper">
+                <form actio="" id="profileForm">
+                    <div class="question question-1">
+                        <label>Name</label>
+                        <br> 
+                        <input 
+                      
+                        onchange="NameUpdated(event)"
+                        class="name"
+                        id="name-field"
+                         placeholder="enter your name" name="name" />
+                <div id="name-error" style="font-size :15px; color:red ;margin-top:10px;display:none ">
+                    Name is required
+                </div>
+               </div>
+                    <div class="question question-2">
+                        <label>Mobile Number</label>
+                        <br>
+                        <input 
+                       onchange="MobileUpdated(event)"
+                        class="mobile"
+                       
+                       placeholder="enter number" name="mobile" />  
+                <div id="number-error" style="font-size :15px; color:red ;margin-top:10px; display:none ">
+                   mobile number is required
+                </div>
+                 </div>
+                      <div class="question question-3">
+                        <label>Age </label>
+                        <br>
+                        <input placeholder="enter age  " name="age" />                
+                      </div>
+                      <div class="question question-4">
+                        <label>Address</label>
+                        <br>
+                         <input 
+                       onchange="NameUpdated(event)"
+                        class="address"
+                       
+                       placeholder="enter address" name="address" />  
+                <div id="number-error" style="font-size :15px; color:red ;margin-top:10px; display:none ">
+                 address is required
+                </div>
+                </div>
+                </form>
+                <div class="button-wrapper">
+                    <button onclick="saveData()"> Preview Profile</button>
+                    <button onclick="Clear()"> Clear Data </button>
+                </div>
+            </div>
+            <div id="profile-display" claSS="profile-display">
+            </div>
+            <script>
+                console.log("Loading Page");
+                formFields=['name','mobile number','age','address'];
+                for(let key of formFields)
+                {
+                 // console.log(localStorage.getItem(key));
+                    document.querySelector('#form-wrapper . '+key).value=localtorage.getitem(key);
+                }
+                function saveData() {
+                    let formData= new FormData(document.getElementById('profileForm'));
+                    
+                    let valid=true
+                    for(let key of formData .keys()) {
+                        if(key=='age'){
+                            if(parseInt(formData.get(key))<18){
+                                window.alert('error , you are not eligible');
+                                return;
+                            }
+                        }
+                        if(valid){
+                        localStorage.setItem(key,formData.get(key));
+                         }
+                        // console.log(formData.get(key));
+                        // localStorage.setItem(key,formData.get(key))
+                        // console.log(key+'='+formData.get(key));
+                    }
+                    
+                }
+                function NameUpdated(event) {
+               if(event.target.value.length<=4){
+                   document.getElementById('name-error').style.display='block'
+               }
+               else{
+                document.getElementById('name-error').style.display='none'
+               } 
+              }
+
+              function MobileUpdated(event) {
+               if(event.target.value.length<10){
+                   document.getElementById('number-error').style.display='block'
+               }
+               else{
+                document.getElementById('number-error').style.display='none'
+               }
+                
+              }
+
+
+            </script>
+         </body>
+         </html>
+        </body>
+    </head>
+</html>
